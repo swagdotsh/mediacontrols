@@ -13,7 +13,7 @@ Nothing extra to install is needed:
 
 ## Install
 
-Userplugins only work in a Vencord build made from source, not the regular installer.
+User plugins only work in a Vencord build made from source, not the regular installer.
 
 ```sh
 git clone https://github.com/Vendicated/Vencord.git
