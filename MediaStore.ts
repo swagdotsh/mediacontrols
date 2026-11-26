@@ -1,13 +1,14 @@
 import { PluginNative } from "@utils/types";
 import { React } from "@webpack/common";
 
-const Native = VencordNative.pluginHelpers.WindowsMediaControls as PluginNative<typeof import("./native")>;
+const Native = VencordNative.pluginHelpers.MediaControls as PluginNative<typeof import("./native")>;
 
 export interface MediaState {
     active: boolean;
     sessions: string[];
     selected: string;
     app?: string;
+    appName?: string;
     title?: string;
     artist?: string;
     album?: string;
@@ -102,7 +103,11 @@ export function useMedia() {
 }
 
 const KNOWN_APPS: [RegExp, string][] = [
-    [/^Spotify/i, "Spotify"],
+    [/^Spotify|^com\.spotify\./i, "Spotify"],
+    [/^com\.apple\.Music$/i, "Music"],
+    [/^com\.apple\.Safari/i, "Safari"],
+    [/^com\.google\.Chrome/i, "Chrome"],
+    [/^com\.microsoft\.edgemac/i, "Edge"],
     [/AppleMusic/i, "Apple Music"],
     [/^chrome/i, "Chrome"],
     [/^msedge/i, "Edge"],

@@ -1,5 +1,6 @@
 import { ChildProcessWithoutNullStreams, spawn } from "child_process";
 
+import { MAC_SCRIPT } from "./macScript";
 import { SMTC_SCRIPT } from "./smtcScript";
 
 let proc: ChildProcessWithoutNullStreams | null = null;
@@ -10,13 +11,26 @@ let state: any = null;
 let thumb: { key: string; url: string | null; } | null = null;
 let revision = 0;
 
+function spawnHelper(): ChildProcessWithoutNullStreams | null {
+    switch (process.platform) {
+        case "win32": {
+            const encoded = Buffer.from(SMTC_SCRIPT, "utf16le").toString("base64");
+            return spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded], {
+                windowsHide: true
+            });
+        }
+        case "darwin":
+            return spawn("/usr/bin/osascript", ["-l", "JavaScript", "-e", MAC_SCRIPT]);
+        default:
+            return null;
+    }
+}
+
 function launch() {
     if (proc || !wanted) return;
 
-    const encoded = Buffer.from(SMTC_SCRIPT, "utf16le").toString("base64");
-    const p = spawn("powershell.exe", ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded], {
-        windowsHide: true
-    });
+    const p = spawnHelper();
+    if (!p) return;
     proc = p;
 
     let buf = "";
@@ -40,6 +54,7 @@ function launch() {
         }
     });
     p.stderr.resume();
+    p.stdin.on("error", () => { });
     p.on("error", () => { });
     p.on("exit", () => {
         if (proc === p) proc = null;

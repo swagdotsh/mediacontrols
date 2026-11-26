@@ -19,8 +19,8 @@ export const settings = definePluginSettings({
 });
 
 export default definePlugin({
-    name: "WindowsMediaControls",
-    description: "Control whatever is playing in the Windows media flyout (Spotify, Apple Music, browsers, ...) from a panel above your account. Disable SpotifyControls, they use the same spot.",
+    name: "MediaControls",
+    description: "Control whatever is playing on Windows or macOS (Spotify, Apple Music, browsers, ...) from a panel above your account. Disable SpotifyControls, they use the same spot.",
     authors: [{ name: "zekkie", id: 495635279387033603n }],
     settings,
 
@@ -48,7 +48,7 @@ export default definePlugin({
                 <ErrorBoundary
                     fallback={() => (
                         <div className="vc-wmc-fallback">
-                            <p>Failed to render Windows media panel :(</p>
+                            <p>Failed to render media panel :(</p>
                             <p>Check the console for errors</p>
                         </div>
                     )}

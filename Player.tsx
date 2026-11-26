@@ -119,7 +119,7 @@ function CoverMenu({ s, thumbnail }: { s: MediaState; thumbnail: string | null; 
                 <Menu.MenuGroup label="Source">
                     <Menu.MenuRadioItem id="vc-wmc-src-auto" group="vc-wmc-src" label="Automatic" checked={s.selected === "auto"} action={() => MediaStore.select("auto")} />
                     {s.sessions.map(id => (
-                        <Menu.MenuRadioItem key={id} id={"vc-wmc-src-" + id} group="vc-wmc-src" label={prettyAppName(id)} checked={s.selected === id} action={() => MediaStore.select(id)} />
+                        <Menu.MenuRadioItem key={id} id={"vc-wmc-src-" + id} group="vc-wmc-src" label={id === s.app && s.appName || prettyAppName(id)} checked={s.selected === id} action={() => MediaStore.select(id)} />
                     ))}
                 </Menu.MenuGroup>
             )}
@@ -155,7 +155,7 @@ function Info({ s, thumbnail }: { s: MediaState; thumbnail: string | null; }) {
                         MediaStore.select(s.sessions[(i + 1) % s.sessions.length]);
                     }}
                 >
-                    {prettyAppName(s.app)}
+                    {s.appName || prettyAppName(s.app)}
                 </div>
             )}
         </div>
