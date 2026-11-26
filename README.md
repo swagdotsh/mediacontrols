@@ -1,6 +1,6 @@
 # MediaControls
 
-A Vencord user plugin that shows a media panel above the Discord account panel and controls whatever is playing on your computer (Spotify, Apple Music, browsers, Media Player, ...). Works on Windows and macOS. Inspired by [SpotifyControls](https://github.com/Vendicated/Vencord/tree/main/src/plugins/spotifyControls).
+A Vencord user plugin that shows a media panel above the Discord account panel and controls whatever is playing on your computer (Spotify, Apple Music, browsers, Media Player, ...). Works on Windows and macOS. Inspired by [SpotifyControls](https://github.com/Vendicated/Vencord/tree/main/src/plugins/spotifyControls) (if you have that plugin on, turn it off before using MediaControls, they conflict).
 
 - Cover art, title, artist, album and the source app
 - Seek bar (when the app supports seeking), shuffle, previous, play/pause, next, repeat
